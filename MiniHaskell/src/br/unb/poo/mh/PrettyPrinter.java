@@ -34,7 +34,7 @@ public class PrettyPrinter implements Visitor{
 	public void visitar(And exp) {
 		System.out.print("(");
 		exp.expEsquerda.aceitar(this);
-		System.out.print("-");
+		System.out.print("&&");
 		exp.expDireita.aceitar(this);
 		System.out.print(")");
 	}
@@ -43,7 +43,7 @@ public class PrettyPrinter implements Visitor{
 	public void visitar(Or exp) {
 		System.out.print("(");
 		exp.expEsquerda.aceitar(this);
-		System.out.print("-");
+		System.out.print("||");
 		exp.expDireita.aceitar(this);
 		System.out.print(")");
 	}
@@ -51,9 +51,8 @@ public class PrettyPrinter implements Visitor{
 	@Override
 	public void visitar(Not exp) {
 		System.out.print("(");
+		System.out.print("!");
 		exp.expEsquerda.aceitar(this);
-		System.out.print("-");
-		exp.expDireita.aceitar(this);
 		System.out.print(")");
 	}
 	

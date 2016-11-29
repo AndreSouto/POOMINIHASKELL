@@ -1,21 +1,31 @@
 package br.unb.poo.mh;
 
-public class Not extends ExpressaoBinaria{
+public class Not extends ExpressaoUnaria{
 
-	public Not(Expressao expDireita, Expressao expEsquerda) {
-		super(expDireita, expEsquerda);
+	public Not(Expressao expEsquerda) {
+		super(expEsquerda);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Valor avaliar() {
-	
-		return null;
+		
+		ValorBooleano ee = (ValorBooleano) expEsquerda.avaliar();
+		
+		if(ee.getValor() == true){
+			
+			return new ValorBooleano(false);
+		}
+		else{
+			
+			return new ValorBooleano(true);
+		}
+		
 	}
 
 	@Override
 	public Tipo tipo() {
-		return (expEsquerda.tipo() == Tipo.Inteiro && expDireita.tipo() == Tipo.Inteiro) ? Tipo.Inteiro : Tipo.Error;
+		return (expEsquerda.tipo() == Tipo.Booleano) ? Tipo.Booleano : Tipo.Error;
 	}
 
 	@Override

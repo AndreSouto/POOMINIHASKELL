@@ -9,16 +9,24 @@ public class And extends ExpressaoBinaria {
 
 	@Override
 	public Valor avaliar() {
-		ValorInteiro v2 = (ValorInteiro) expEsquerda.avaliar();
-		ValorInteiro v1 = (ValorInteiro) expDireita.avaliar();
 		
+		ValorBooleano ed = (ValorBooleano) expDireita.avaliar();
+		ValorBooleano ee = (ValorBooleano) expEsquerda.avaliar();
 		
-		return new ValorInteiro(v1.getValor() / v2.getValor());
+		if(ed.getValor() == true && ee.getValor() == true){
+			
+			return new ValorBooleano(true);
+		}
+		else{
+			
+			return new ValorBooleano(false);
+		}
 	}
 
 	@Override
 	public Tipo tipo() {
-		return (expEsquerda.tipo() == Tipo.Inteiro && expDireita.tipo() == Tipo.Inteiro) ? Tipo.Inteiro : Tipo.Error;
+		return (expEsquerda.tipo() == Tipo.Booleano && expDireita.tipo() == Tipo.Booleano)
+				? Tipo.Booleano : Tipo.Error;
 	}
 
 	@Override
