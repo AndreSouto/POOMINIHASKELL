@@ -3,11 +3,13 @@ package br.unb.cic.poo.mh;
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.unb.poo.mh.And;
 import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Igual;
 import br.unb.poo.mh.MaiorIgual;
 import br.unb.poo.mh.MenorIgual;
 import br.unb.poo.mh.Or;
+import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
 
@@ -34,5 +36,17 @@ public class TesteExpressaoOr {
 		Assert.assertEquals(v_verdadeiro, new Or(igualdade2,maiorIgual).avaliar());
 		Assert.assertEquals(v_verdadeiro, new Or(igualdade2,maiorIgual2).avaliar());
 		Assert.assertEquals(v_falso, new Or(igualdade,maiorIgual2).avaliar());
+	}
+	
+	@Test
+	public void testOrTipo(){
+		
+		ValorInteiro v1 = new ValorInteiro(10);
+		ValorBooleano v2 = new ValorBooleano(false);
+		ValorBooleano v3 = new ValorBooleano(true);
+		
+		Assert.assertEquals(Tipo.Booleano, new Or(v3,v2).tipo());
+		Assert.assertEquals(Tipo.Error, new Or(v1,v2).tipo());
+		
 	}
 }

@@ -6,6 +6,8 @@ import org.junit.Test;
 import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Subtracao;
 import br.unb.poo.mh.ValorInteiro;
+import br.unb.poo.mh.Tipo;
+import br.unb.poo.mh.ValorBooleano;
 
 public class TesteExpressaoSubtracao {
 	
@@ -29,6 +31,24 @@ public class TesteExpressaoSubtracao {
 		ValorInteiro v20 = new ValorInteiro(20);
 		
 		Assert.assertEquals(v20, sub.avaliar());
+	}
+
+	@Test
+	public void testeSubtracaoTipoOk() {
+		ValorInteiro v3 = new ValorInteiro(3);
+		ValorInteiro v5 = new ValorInteiro(5);
+		Expressao sub4 = new Subtracao(v5, v3);
+		
+		Assert.assertEquals(Tipo.Inteiro, sub4.tipo());
+	}
+	
+	@Test
+	public void testeSomaTipoNok() {
+		ValorBooleano t = new ValorBooleano(true);
+		ValorInteiro v5 = new ValorInteiro(5);
+		Expressao sub5 = new Subtracao(t, v5);
+		
+		Assert.assertEquals(Tipo.Error, sub5.tipo());
 	}
 
 }

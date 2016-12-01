@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.unb.poo.mh.Not;
+import br.unb.poo.mh.Tipo;
+import br.unb.poo.mh.And;
 import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Igual;
 import br.unb.poo.mh.MaiorIgual;
@@ -18,7 +20,7 @@ public class TesteExpressaoNot {
 	private ValorInteiro v10 = new ValorInteiro(10);
 	
 	@Test
-	public void testAnd(){
+	public void testNot(){
 		
 		Expressao maiorIgual = new MaiorIgual(v10,v5);
 		Expressao igualdade = new Igual(v_falso, v_verdadeiro);
@@ -29,5 +31,16 @@ public class TesteExpressaoNot {
 		Assert.assertEquals(v_verdadeiro, new Not(igualdade).avaliar());
 		Assert.assertEquals(v_verdadeiro, new Not(maiorIgual2).avaliar());
 		Assert.assertEquals(v_falso, new Not(igualdade2).avaliar());
+	}
+	
+	@Test
+	public void testNotTipo(){
+		
+		ValorInteiro v1 = new ValorInteiro(10);
+		ValorBooleano v2 = new ValorBooleano(false);
+		
+		Assert.assertEquals(Tipo.Booleano, new Not(v2).tipo());
+		Assert.assertEquals(Tipo.Error, new Not(v1).tipo());
+		
 	}
 }

@@ -8,6 +8,7 @@ import org.junit.Test;
 import br.unb.poo.mh.Menor;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
+import br.unb.poo.mh.Tipo;
 
 public class TesteExpressaoMenor {
 
@@ -15,7 +16,7 @@ public class TesteExpressaoMenor {
 	private ValorBooleano v_falso = new ValorBooleano(false);
 	
 	@Test
-	public void testIgualdadeInteiro(){
+	public void testeComparacaoInteiro(){
 		
 		ValorInteiro v1 = new ValorInteiro(10);
 		ValorInteiro v2 = new ValorInteiro(10);
@@ -24,5 +25,18 @@ public class TesteExpressaoMenor {
 		Assert.assertEquals(v_falso, new Menor(v3,v1).avaliar());
 		Assert.assertEquals(v_falso, new Menor(v3,v2).avaliar());
 		Assert.assertEquals(v_verdadeiro, new Menor(v1,v3).avaliar());
+	}
+	
+	@Test
+	public void testeComparacaoTipo() {
+		
+		ValorInteiro v1 = new ValorInteiro(10);
+		ValorInteiro v2 = new ValorInteiro(10);
+		ValorBooleano v3 = new ValorBooleano(true);
+		
+		Assert.assertEquals(Tipo.Booleano, new Menor(v1,v2).tipo());
+		Assert.assertEquals(Tipo.Error, new Menor(v1,v3).tipo());
+		Assert.assertEquals(Tipo.Error, new Menor(v3,v1).tipo());
+		
 	}
 }

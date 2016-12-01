@@ -8,6 +8,7 @@ import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Igual;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
+import br.unb.poo.mh.Tipo;
 
 public class TesteExpressaoIgual { 
 	
@@ -39,5 +40,34 @@ public class TesteExpressaoIgual {
 		
 	}
 	
+	@Test
+	public void testIgualdadeTipoBooleanoOk() {
+		
+		ValorBooleano v1 = new ValorBooleano(true);
+		ValorBooleano v2 = new ValorBooleano(false);
+		
+		Expressao igualdade = new Igual(v1,v2);
+		Assert.assertEquals(Tipo.Booleano, igualdade.tipo());
+		
+	}
+	
+	@Test
+	public void testIgualdadeTipoInteiroOk(){
+		
+		ValorInteiro v1 = new ValorInteiro(10);
+		ValorInteiro v2 = new ValorInteiro(10);
+		
+		Assert.assertEquals(Tipo.Booleano, new Igual(v1,v2).tipo());
+		
+	}
 
+	@Test
+	public void testIgualdadeTipoNok(){
+		
+		ValorInteiro v1 = new ValorInteiro(10);
+		ValorBooleano v2 = new ValorBooleano(false);
+		
+		Assert.assertEquals(Tipo.Error, new Igual(v1,v2).tipo());
+		
+	}
 }
