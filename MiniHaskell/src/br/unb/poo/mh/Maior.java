@@ -23,7 +23,7 @@ public class Maior extends ExpressaoBinaria {
 	@Override
 	public Tipo tipo() {
 		return ((expEsquerda.tipo() == Tipo.Inteiro && expDireita.tipo() == Tipo.Inteiro))
-				? Tipo.Inteiro : Tipo.Error;
+				? Tipo.Booleano : Tipo.Error;
 	}
 
 	@Override

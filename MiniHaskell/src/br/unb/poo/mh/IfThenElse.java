@@ -21,7 +21,7 @@ public class IfThenElse implements Expressao {
 
 	@Override
 	public Tipo tipo() {
-		return Tipo.Error;
+		return (condicao.tipo() == Tipo.Booleano) ? Tipo.Booleano : Tipo.Error;
 	}
 
 	@Override

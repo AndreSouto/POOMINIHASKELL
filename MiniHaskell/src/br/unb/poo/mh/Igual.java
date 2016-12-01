@@ -37,7 +37,7 @@ public class Igual extends ExpressaoBinaria {
 	public Tipo tipo() {
 		return ((expEsquerda.tipo() == Tipo.Inteiro && expDireita.tipo() == Tipo.Inteiro) ||
 				(expEsquerda.tipo() == Tipo.Booleano && expDireita.tipo() == Tipo.Booleano))
-				? Tipo.Inteiro : Tipo.Error;
+				? Tipo.Booleano : Tipo.Error;
 	}
 
 	@Override
