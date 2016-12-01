@@ -7,6 +7,8 @@ import br.unb.poo.mh.And;
 import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Igual;
 import br.unb.poo.mh.MaiorIgual;
+import br.unb.poo.mh.PrettyPrinter;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
@@ -46,4 +48,25 @@ public class TesteExpressaoAnd {
 		Assert.assertEquals(Tipo.Error, new And(v1,v2).tipo());
 		
 	}
+	
+	@Test
+	public void testeAndPrint(){
+		ValorBooleano v2 = new ValorBooleano(false);
+		ValorBooleano v3 = new ValorBooleano(true);
+		And e = new And(v2,v3);
+		PrettyPrinter pp = new PrettyPrinter();
+		e.aceitar(pp);
+	}
+	
+	@Test
+	public void testeAndTamanho(){
+		ValorBooleano v2 = new ValorBooleano(false);
+		ValorBooleano v3 = new ValorBooleano(true);
+		And e = new And(v2,v3);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		e.aceitar(t);
+		Assert.assertEquals( 3 ,t.getTamanho());
+	}
+	
+	
 }

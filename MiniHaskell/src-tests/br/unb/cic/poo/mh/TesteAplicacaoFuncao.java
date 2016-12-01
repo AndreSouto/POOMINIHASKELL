@@ -15,6 +15,7 @@ import br.unb.poo.mh.ExpressaoSoma;
 import br.unb.poo.mh.Identificador;
 import br.unb.poo.mh.PrettyPrinter;
 import br.unb.poo.mh.TamanhoDasExpressoes;
+import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.ValorInteiro;
 
 public class TesteAplicacaoFuncao {
@@ -46,9 +47,10 @@ public class TesteAplicacaoFuncao {
 		
 		PrettyPrinter pp = new PrettyPrinter();
 		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
-		
+		Assert.assertEquals(Tipo.Error, aplicaSoma.tipo());
 		aplicaSoma.aceitar(pp);
 		aplicaSoma.aceitar(t);
 		System.out.println(t.getTamanho());
 	}
+	
 }

@@ -4,8 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.unb.poo.mh.Not;
+import br.unb.poo.mh.PrettyPrinter;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.Tipo;
-import br.unb.poo.mh.And;
 import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Igual;
 import br.unb.poo.mh.MaiorIgual;
@@ -42,5 +43,22 @@ public class TesteExpressaoNot {
 		Assert.assertEquals(Tipo.Booleano, new Not(v2).tipo());
 		Assert.assertEquals(Tipo.Error, new Not(v1).tipo());
 		
+	}
+	
+	@Test
+	public void testeNotPrint(){
+		ValorBooleano B2 = new ValorBooleano(true);
+		Expressao not = new Not(B2);
+		PrettyPrinter pp = new PrettyPrinter();
+		not.aceitar(pp);
+	}
+	
+	@Test
+	public void testeNotTamanho(){
+		ValorBooleano B2 = new ValorBooleano(true);
+		Expressao not = new Not(B2);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		not.aceitar(t);
+		Assert.assertEquals( 2 ,t.getTamanho());
 	}
 }

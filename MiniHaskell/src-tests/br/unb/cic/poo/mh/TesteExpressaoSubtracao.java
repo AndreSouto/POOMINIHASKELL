@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test; 
 
 import br.unb.poo.mh.Expressao;
+import br.unb.poo.mh.PrettyPrinter;
 import br.unb.poo.mh.Subtracao;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.ValorInteiro;
 import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.ValorBooleano;
@@ -50,5 +52,23 @@ public class TesteExpressaoSubtracao {
 		
 		Assert.assertEquals(Tipo.Error, sub5.tipo());
 	}
+	
+	@Test
+	public void testeSubtracaoPrint(){
+		ValorInteiro v20 = new ValorInteiro(20);
+		ValorInteiro v2 = new ValorInteiro(2);
+		Subtracao sub = new Subtracao(v20,v2);
+		PrettyPrinter pp = new PrettyPrinter();
+		sub.aceitar(pp);
+	}
 
+	@Test
+	public void testeSubtracaoTamanho(){
+		ValorInteiro v20 = new ValorInteiro(20);
+		ValorInteiro v2 = new ValorInteiro(2);
+		Expressao sub = new Subtracao(v20, v2);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		sub.aceitar(t);
+		Assert.assertEquals( 3 ,t.getTamanho());
+	}
 }

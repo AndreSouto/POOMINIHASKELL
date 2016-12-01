@@ -6,6 +6,8 @@ import org.junit.Test;
 import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.Multiplicacao;
+import br.unb.poo.mh.PrettyPrinter;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
 
@@ -47,6 +49,25 @@ public class TesteExpressaoMultiplicacao {
 		Expressao m6 = new Multiplicacao(v10, m5);
 		
 		Assert.assertEquals(new ValorInteiro(2500), m6.avaliar());
+	}
+	
+	@Test
+	public void testeMultiplicacaoPrint(){
+		ValorInteiro v20 = new ValorInteiro(20);
+		ValorInteiro v2 = new ValorInteiro(2);
+		Multiplicacao multi = new Multiplicacao(v20,v2);
+		PrettyPrinter pp = new PrettyPrinter();
+		multi.aceitar(pp);
+	}
+	
+	@Test
+	public void testeMultiplicacaoTamanho(){
+		ValorInteiro v20 = new ValorInteiro(20);
+		ValorInteiro v2 = new ValorInteiro(2);
+		Multiplicacao multi = new Multiplicacao(v20,v2);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		multi.aceitar(t);
+		Assert.assertEquals( 3 ,t.getTamanho());
 	}
 	
 }

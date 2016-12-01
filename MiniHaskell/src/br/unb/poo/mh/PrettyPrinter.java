@@ -11,6 +11,11 @@ public class PrettyPrinter implements Visitor{
 	public void visitar(ValorBooleano exp) {
 		System.out.print(exp.getValor());
 	}
+	
+	@Override
+	public void visitar(ValorFloat exp) {
+		System.out.print(exp.getValor());
+	}
 
 	@Override
 	public void visitar(ExpressaoSoma exp) {

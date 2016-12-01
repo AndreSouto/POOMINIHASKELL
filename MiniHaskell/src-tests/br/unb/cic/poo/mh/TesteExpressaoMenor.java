@@ -1,11 +1,11 @@
 package br.unb.cic.poo.mh;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import br.unb.poo.mh.Menor;
+import br.unb.poo.mh.PrettyPrinter;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
 import br.unb.poo.mh.Tipo;
@@ -39,4 +39,17 @@ public class TesteExpressaoMenor {
 		Assert.assertEquals(Tipo.Error, new Menor(v3,v1).tipo());
 		
 	}
+	
+	@Test
+	public void testeMenorPrint(){
+		ValorInteiro v2 = new ValorInteiro(1);
+		ValorInteiro v3 = new ValorInteiro(2);
+		Menor menor = new Menor(v2,v3);
+		PrettyPrinter pp = new PrettyPrinter();
+		menor.aceitar(pp);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		menor.aceitar(t);
+		Assert.assertEquals( 3 ,t.getTamanho());
+	}
+	
 }

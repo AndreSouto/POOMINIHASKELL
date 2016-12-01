@@ -23,7 +23,6 @@ public class IfThenElse implements Expressao {
 	public Tipo tipo() {
 		return (condicao.tipo() == Tipo.Booleano) ? Tipo.Booleano : Tipo.Error;
 		
-		//TODO: Melhorar/confirmar definição do tipo da IfThenElse
 	}
 
 	@Override

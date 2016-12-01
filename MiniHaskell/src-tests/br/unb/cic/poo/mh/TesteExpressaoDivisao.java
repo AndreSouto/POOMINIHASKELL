@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import br.unb.poo.mh.Divisao;
 import br.unb.poo.mh.Expressao;
+import br.unb.poo.mh.PrettyPrinter;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.ValorInteiro;
 import br.unb.poo.mh.ValorBooleano;
@@ -51,14 +53,32 @@ public class TesteExpressaoDivisao {
 		Assert.assertEquals(Tipo.Error, div6.tipo());
 	}
 
-	@Test
+	/*@Test
 	public void testeDivisaoFloat() {
 		ValorInteiro v10 = new ValorInteiro(10);
 		ValorInteiro v3 = new ValorInteiro(3);
 		
 		Expressao div = new Divisao(v10,v3);
-		//TODO: AVALIAR A EXCESSÃO/TIPO FLOAT
+		//TODO: AVALIAR A EXCESSï¿½O/TIPO FLOAT
 		
+	}*/
+	
+	@Test
+	public void testeDivisaoPrint(){
+		ValorInteiro v20 = new ValorInteiro(20);
+		ValorInteiro v2 = new ValorInteiro(2);
+		Divisao Div = new Divisao(v20,v2);
+		PrettyPrinter pp = new PrettyPrinter();
+		Div.aceitar(pp);
 	}
 	
+	@Test
+	public void testeDivisaoTamanho(){
+		ValorInteiro v20 = new ValorInteiro(20);
+		ValorInteiro v2 = new ValorInteiro(2);
+		Divisao Div = new Divisao(v20,v2);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		Div.aceitar(t);
+		Assert.assertEquals( 3 ,t.getTamanho());
+	}
 }

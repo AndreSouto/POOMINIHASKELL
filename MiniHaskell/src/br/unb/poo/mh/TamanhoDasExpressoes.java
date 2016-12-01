@@ -16,6 +16,11 @@ public class TamanhoDasExpressoes implements Visitor {
 	public void visitar(ValorBooleano exp) {
 		tamanho += 1;
 	}
+	
+	@Override
+	public void visitar(ValorFloat exp) {
+		tamanho += 1;
+	}
 
 	@Override
 	public void visitar(ExpressaoSoma exp) {

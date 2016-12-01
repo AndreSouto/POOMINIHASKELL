@@ -1,12 +1,12 @@
 package br.unb.cic.poo.mh;
 
-import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.unb.poo.mh.Expressao;
 import br.unb.poo.mh.MaiorIgual;
+import br.unb.poo.mh.PrettyPrinter;
+import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.Tipo;
 import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
@@ -40,5 +40,24 @@ public class TesteExpressaoMaiorIgual {
 		Assert.assertEquals(Tipo.Error, new MaiorIgual(v1,v3).tipo());
 		Assert.assertEquals(Tipo.Error, new MaiorIgual(v3,v1).tipo());
 		
+	}
+	
+	@Test
+	public void testeMaiorIgualPrint(){
+		ValorInteiro v2 = new ValorInteiro(1);
+		ValorInteiro v3 = new ValorInteiro(2);
+		MaiorIgual maior = new MaiorIgual(v2,v3);
+		PrettyPrinter pp = new PrettyPrinter();
+		maior.aceitar(pp);
+	}
+	
+	@Test
+	public void testeMaiorIgualTamanho(){
+		ValorInteiro v2 = new ValorInteiro(1);
+		ValorInteiro v3 = new ValorInteiro(2);
+		MaiorIgual maior = new MaiorIgual(v2,v3);
+		TamanhoDasExpressoes t = new TamanhoDasExpressoes();
+		maior.aceitar(t);
+		Assert.assertEquals( 3 ,t.getTamanho());
 	}
 }
