@@ -131,6 +131,7 @@ public class TamanhoDasExpressoes implements Visitor {
 	
 	@Override
 	public void visitar(ValorLista exp) {
-		tamanho += 1;
+		tamanho = exp.tam().getValor();
+		//tamanho += 1;
 	}
 }

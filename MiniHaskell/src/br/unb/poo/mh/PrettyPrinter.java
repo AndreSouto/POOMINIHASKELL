@@ -159,7 +159,13 @@ public class PrettyPrinter implements Visitor{
 	
 	@Override
 	public void visitar(ValorLista exp) {
-		System.out.print(exp.getValor());
+		ValorInteiro tamanho = exp.tam();
+		for(int i=0;i < tamanho.getValor();i++){
+			ValorInteiro j = new ValorInteiro(i);
+			System.out.print(exp.recuperar(j));
+			System.out.print(" ");
+		}
+		
 	}
 
 }
