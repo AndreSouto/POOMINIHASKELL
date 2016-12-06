@@ -27,5 +27,5 @@ public interface Visitor {
 	public void visitar(MenorIgual exp);
 	public void visitar(AplicacaoFuncao exp);
 	public void visitar(Identificador exp);
-
+	public void visitar(ValorLista exp);
 }

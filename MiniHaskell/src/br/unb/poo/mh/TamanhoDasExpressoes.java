@@ -128,4 +128,9 @@ public class TamanhoDasExpressoes implements Visitor {
 		tamanho += 1;
 	}
 
+	
+	@Override
+	public void visitar(ValorLista exp) {
+		tamanho += 1;
+	}
 }

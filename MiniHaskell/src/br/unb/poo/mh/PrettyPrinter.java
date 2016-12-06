@@ -156,5 +156,10 @@ public class PrettyPrinter implements Visitor{
 	public void visitar(Identificador exp) {
 		System.out.println(exp.id);
 	}
+	
+	@Override
+	public void visitar(ValorLista exp) {
+		System.out.print(exp.getValor());
+	}
 
 }
