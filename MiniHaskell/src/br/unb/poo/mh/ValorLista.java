@@ -36,8 +36,7 @@ public class ValorLista<T> extends ValorParametrizado<T>{
 		
 		if(background.size() <= indice.getValor()){
 			
-			return null;
-			//return (T) Tipo.Error;
+			return (T) Tipo.Error;
 		}
 		else{
 			

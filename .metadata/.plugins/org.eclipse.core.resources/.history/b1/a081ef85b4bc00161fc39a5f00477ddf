@@ -1,0 +1,60 @@
+/**
+ * Define a grammar called Hello
+ */
+grammar Hello;
+//r  : 'hello' ID ;         // match keyword hello followed by an identifier
+
+//ID : [a-z]+ ;             // match lower-case identifiers
+
+//WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+ 
+options {
+    language = CSharp2;
+}
+ 
+@header {
+    using System;
+    using System.Globalization;
+}
+ 
+@parser::namespace { BasicExpressions }
+@lexer::namespace { BasicExpressions }
+ 
+parse returns [double value]
+    : addExpression EOF {$value = $addExpression.value; }
+    ;
+ 
+ 
+addExpression returns [double value]
+    : left = multExpression {$value = $left.value;}
+    (
+        '+' right = multExpression {$value += $right.value;} |
+        '-' right = multExpression {$value -= $right.value;}
+    )*
+    ;
+ 
+multExpression returns [double value]
+    : left = unaryExpression {$value = $left.value;}
+    (
+        '*' right = unaryExpression {$value *= $right.value;} |
+        '/' right = unaryExpression {$value /= $right.value;}
+    )*
+    ;
+ 
+unaryExpression returns [double value]
+     : '-' atom {$value = -$atom.value;}
+     | atom     {$value = $atom.value;}
+     ;
+ 
+atom returns [double value] 
+    : Number {$value = Double.Parse($Number.Text, CultureInfo.InvariantCulture); }
+    | '(' addExpression ')' { $value = $addExpression.value; }
+    ;
+ 
+Number  
+    :   ('0'..'9')+ ('.' ('0'..'9')+)?
+    ;
+ 
+Space
+    :   (' ' | 't' | 'r' | 'n' ) { Skip(); }
+    ;
