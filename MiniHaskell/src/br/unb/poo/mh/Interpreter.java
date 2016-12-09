@@ -6,19 +6,30 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class Interpreter {
 	
-	Scanner scanner = new Scanner(System.in); 
+	//Scanner scanner = new Scanner(System.in); 
 	
 	 public static void main(String args[]) throws IOException{
-		 
-		 Scanner scanner = new Scanner(System.in);
-		 String input = scanner.nextLine();
-		 
-		 if(input.startsWith("eval(") == true){ //Caso seja digitado eval(...)
+	
+		while(true){
+			String input = getInput();
+			evalInput(input);
+		}
+	 }
+	 
+	private static String getInput() throws IOException{
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		return input;
+	}
+	
+	public static void evalInput(String input) throws IOException{
+		if(input.startsWith("eval(") == true){ //Caso seja digitado eval(...)
 			
 			 String exp = "";
 			 int indice = input.indexOf("(");
@@ -50,8 +61,7 @@ public class Interpreter {
 			 
 			 System.out.println("Comando Incorreto!");
 		 }
-	
-	 }
+	}
 
 	 
 	private static void processaArquivo(String nome_file) throws IOException {
@@ -84,203 +94,209 @@ public class Interpreter {
 	 */
 	private static void evaluate(String exp) { 
 		
-		Stack<Character> pilha = new Stack<Character>();
-		
-		char elementos[] = exp.toCharArray();
-		
-		/******************Validacao da expressao inserida*******************/
-		
-		for(int i = 0; i < exp.length(); i++){
+		try {
+			Stack<Character> pilha = new Stack<Character>();
 			
-			if(elementos[i] == '('){
-				
-				pilha.push(elementos[i]);
-			}
-			else if(elementos[i] == ')'){
-				
-				if(pilha.empty() == true){
+			char elementos[] = exp.toCharArray();
+			
+			/******************Validacao da expressao inserida*******************/
+			
+			
+				for(int i = 0; i < exp.length(); i++){
 					
-					System.out.println("Expressão inválida");
-					break;
-				}
-				else{
-					
-					pilha.pop();
-				}
-			}
-		}
-	
-		/*****************************FIM*************************************/
-		
-		
-		if(pilha.empty() == false){	//Caso a expressao seja invalida
-			
-			System.out.println("Expressão inválida");
-		}
-		else{	//Caso a expressao seja valida
-			
-			ArrayList<Character> exp_saida = new ArrayList<Character>();
-			Stack<Character> infixPosfix = new Stack<Character>();
-			
-			
-		/******************Forma Infixa Para Posfixa**************************/	
-			
-			for(int i = 0; i < exp.length(); i++){
-				
-				if(elementos[i] != '+' && elementos[i] != '-' && 
-				   elementos[i] != '/' && elementos[i] != '*' &&
-				   elementos[i] != '(' && elementos[i] != ')'){
-					
-					exp_saida.add(elementos[i]);
-				}
-				else{	//Ao encontrar um operador
-					
-					char topo = ' '; //topo da pilha
-					
-					if(elementos[i] == '+'){
+					if(elementos[i] == '('){
 						
-						if(infixPosfix.isEmpty() == false){
-							
-							topo = infixPosfix.pop();
-						}
-						while(infixPosfix.isEmpty() == false && 
-							 (topo == '+' || topo == '-' ||
-							  topo == '*' || topo == '/')){
-							
-							exp_saida.add(topo);
-							topo = infixPosfix.pop();
-						}
-						
-						infixPosfix.push(topo);
-						infixPosfix.push(elementos[i]);
-						
-					}
-					else if(elementos[i] == '-'){
-						
-						if(infixPosfix.isEmpty() == false){
-							
-							topo = infixPosfix.pop();
-						}
-						while(infixPosfix.isEmpty() == false && 
-							 (topo == '+' || topo == '-' ||
-							  topo == '*' || topo == '/')){
-							
-							exp_saida.add(topo);
-							topo = infixPosfix.pop();
-						}
-						
-						infixPosfix.push(topo);
-						infixPosfix.push(elementos[i]);
-						
-					}
-					else if(elementos[i] == '/'){
-						
-						if(infixPosfix.isEmpty() == false){
-							
-							topo = infixPosfix.pop();
-						}
-						while(infixPosfix.isEmpty() == false &&
-							 (topo == '*' || topo == '/')){
-							
-							exp_saida.add(topo);
-							topo = infixPosfix.pop();
-						}
-						
-						infixPosfix.push(topo);
-						infixPosfix.push(elementos[i]);
-						
-					}
-					else if(elementos[i] == '*'){
-						
-						if(infixPosfix.isEmpty() == false){
-							
-							topo = infixPosfix.pop();
-						}
-						while(infixPosfix.isEmpty() == false &&
-							 (topo == '*' || topo == '/')){
-							
-							exp_saida.add(topo);
-							topo = infixPosfix.pop();
-						}
-						
-						infixPosfix.push(topo);
-						infixPosfix.push(elementos[i]);
-						
-					}
-					else if(elementos[i] == '('){
-						
-						infixPosfix.push(elementos[i]);
+						pilha.push(elementos[i]);
 					}
 					else if(elementos[i] == ')'){
 						
-						topo = infixPosfix.pop();
-						while(topo != '('){
+						if(pilha.empty() == true){
 							
-							exp_saida.add(topo);
-							topo = infixPosfix.pop();
+							System.out.println("Expressão inválida");
+							break;
+						}
+						else{
+							
+							pilha.pop();
 						}
 					}
+				}
+			
+
+			/*****************************FIM*************************************/
+			
+			
+			if(pilha.empty() == false){	//Caso a expressao seja invalida
+				
+				System.out.println("Expressão inválida");
+			}
+			else{	//Caso a expressao seja valida
+				
+				ArrayList<Character> exp_saida = new ArrayList<Character>();
+				Stack<Character> infixPosfix = new Stack<Character>();
+				
+				
+			/******************Forma Infixa Para Posfixa**************************/	
+				
+				for(int i = 0; i < exp.length(); i++){
 					
+					if(elementos[i] != '+' && elementos[i] != '-' && 
+					   elementos[i] != '/' && elementos[i] != '*' &&
+					   elementos[i] != '(' && elementos[i] != ')'){
+						
+						exp_saida.add(elementos[i]);
+					}
+					else{	//Ao encontrar um operador
+						
+						char topo = ' '; //topo da pilha
+						
+						if(elementos[i] == '+'){
+							
+							if(infixPosfix.isEmpty() == false){
+								
+								topo = infixPosfix.pop();
+							}
+							while(infixPosfix.isEmpty() == false && 
+								 (topo == '+' || topo == '-' ||
+								  topo == '*' || topo == '/')){
+								
+								exp_saida.add(topo);
+								topo = infixPosfix.pop();
+							}
+							
+							infixPosfix.push(topo);
+							infixPosfix.push(elementos[i]);
+							
+						}
+						else if(elementos[i] == '-'){
+							
+							if(infixPosfix.isEmpty() == false){
+								
+								topo = infixPosfix.pop();
+							}
+							while(infixPosfix.isEmpty() == false && 
+								 (topo == '+' || topo == '-' ||
+								  topo == '*' || topo == '/')){
+								
+								exp_saida.add(topo);
+								topo = infixPosfix.pop();
+							}
+							
+							infixPosfix.push(topo);
+							infixPosfix.push(elementos[i]);
+							
+						}
+						else if(elementos[i] == '/'){
+							
+							if(infixPosfix.isEmpty() == false){
+								
+								topo = infixPosfix.pop();
+							}
+							while(infixPosfix.isEmpty() == false &&
+								 (topo == '*' || topo == '/')){
+								
+								exp_saida.add(topo);
+								topo = infixPosfix.pop();
+							}
+							
+							infixPosfix.push(topo);
+							infixPosfix.push(elementos[i]);
+							
+						}
+						else if(elementos[i] == '*'){
+							
+							if(infixPosfix.isEmpty() == false){
+								
+								topo = infixPosfix.pop();
+							}
+							while(infixPosfix.isEmpty() == false &&
+								 (topo == '*' || topo == '/')){
+								
+								exp_saida.add(topo);
+								topo = infixPosfix.pop();
+							}
+							
+							infixPosfix.push(topo);
+							infixPosfix.push(elementos[i]);
+							
+						}
+						else if(elementos[i] == '('){
+							
+							infixPosfix.push(elementos[i]);
+						}
+						else if(elementos[i] == ')'){
+							
+							topo = infixPosfix.pop();
+							while(topo != '('){
+								
+								exp_saida.add(topo);
+								topo = infixPosfix.pop();
+							}
+						}
+						
+						
+					}
 					
 				}
 				
-			}
-			
-			while(infixPosfix.isEmpty() == false){ //Esvaziando o restando da pilha
-				
-				exp_saida.add(infixPosfix.pop());
-				infixPosfix.pop();
-			}
-			
-		/**********************FIM********************************************/	
-			
-			
-		/***********************Avaliacao da expressao************************/	
-		
-			Stack<ValorInteiro> avaliacao = new Stack<ValorInteiro>();
-			
-			for(int i = 0; i < exp_saida.size(); i++){
-	
-				if(exp_saida.get(i) != '+' && exp_saida.get(i) != '-' &&
-				   exp_saida.get(i) != '*' && exp_saida.get(i) != '/'){
+				while(infixPosfix.isEmpty() == false){ //Esvaziando o restando da pilha
 					
-					avaliacao.push(new ValorInteiro((int)exp_saida.get(i) - 48));
+					exp_saida.add(infixPosfix.pop());
+					infixPosfix.pop();
 				}
-				else{ //Caso seja operador 
-					
-					ValorInteiro v1 = avaliacao.pop();
-					ValorInteiro v2 = avaliacao.pop();
-					
-					if(exp_saida.get(i) == '+'){ 
-						
-						ExpressaoSoma soma = new ExpressaoSoma(v1,v2);
-						avaliacao.push((ValorInteiro)soma.avaliar());
-					}
-					else if(exp_saida.get(i) == '-'){
-						
-						Subtracao sub = new Subtracao(v1,v2);
-						avaliacao.push((ValorInteiro)sub.avaliar());
-					}
-					else if(exp_saida.get(i) == '*'){
-						
-						Multiplicacao mul = new Multiplicacao(v1,v2);
-						avaliacao.push((ValorInteiro)mul.avaliar());
-					}
-					else if(exp_saida.get(i) == '/'){
-						
-						Divisao div = new Divisao(v1,v2);
-						avaliacao.push((ValorInteiro)div.avaliar());
-					}
-					
-				} 
 				
+			/**********************FIM********************************************/	
+				
+				
+			/***********************Avaliacao da expressao************************/	
+			
+				Stack<ValorInteiro> avaliacao = new Stack<ValorInteiro>();
+				
+				for(int i = 0; i < exp_saida.size(); i++){
+
+					if(exp_saida.get(i) != '+' && exp_saida.get(i) != '-' &&
+					   exp_saida.get(i) != '*' && exp_saida.get(i) != '/'){
+						
+						avaliacao.push(new ValorInteiro((int)exp_saida.get(i) - 48));
+					}
+					else{ //Caso seja operador 
+						
+						ValorInteiro v1 = avaliacao.pop();
+						ValorInteiro v2 = avaliacao.pop();
+						
+						if(exp_saida.get(i) == '+'){ 
+							
+							ExpressaoSoma soma = new ExpressaoSoma(v1,v2);
+							avaliacao.push((ValorInteiro)soma.avaliar());
+						}
+						else if(exp_saida.get(i) == '-'){
+							
+							Subtracao sub = new Subtracao(v1,v2);
+							avaliacao.push((ValorInteiro)sub.avaliar());
+						}
+						else if(exp_saida.get(i) == '*'){
+							
+							Multiplicacao mul = new Multiplicacao(v1,v2);
+							avaliacao.push((ValorInteiro)mul.avaliar());
+						}
+						else if(exp_saida.get(i) == '/'){
+							
+							Divisao div = new Divisao(v2,v1);
+							avaliacao.push((ValorInteiro)div.avaliar());
+						}
+						
+					} 
+					
+				}
+				
+				
+				System.out.println("Resultado: "+avaliacao.pop().getValor());
+				
+			/*******************************FIM***********************************/
+			
 			}
-			
-			
-			System.out.println("Resultado: "+avaliacao.pop().getValor());
-			
-		/*******************************FIM***********************************/
-		
+		} catch (Exception e) {
+			System.out.println("Expressão inválida");
 		}
 		
 	}

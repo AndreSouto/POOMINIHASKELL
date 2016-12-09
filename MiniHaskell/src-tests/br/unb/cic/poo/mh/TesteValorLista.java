@@ -4,11 +4,9 @@ import org.junit.Assert;
 
 import org.junit.Test;
 
-import br.unb.poo.mh.And;
 import br.unb.poo.mh.PrettyPrinter;
 import br.unb.poo.mh.TamanhoDasExpressoes;
 import br.unb.poo.mh.Tipo;
-import br.unb.poo.mh.ValorBooleano;
 import br.unb.poo.mh.ValorInteiro;
 import br.unb.poo.mh.ValorLista;
 
@@ -86,7 +84,6 @@ public class TesteValorLista {
 		ValorLista<Integer> lista = new ValorLista<Integer>(v1.getValor());
 		lista.adicionar(v2.getValor());
 		lista.adicionar(v10.getValor());
-		Assert.assertEquals( null,lista.recuperar(new ValorInteiro(3)));
-		//Assert.assertEquals(Tipo.Error, lista.recuperar(new ValorInteiro(3)) );
+		Assert.assertEquals(Tipo.Error, lista.recuperar(new ValorInteiro(3)) );
 	}
 }
