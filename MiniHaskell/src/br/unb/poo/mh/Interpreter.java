@@ -2,7 +2,7 @@ package br.unb.poo.mh;
 
 import java.awt.List;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,17 +67,25 @@ public class Interpreter {
 	private static void processaArquivo(String nome_file) throws IOException {
 		
 		//ArrayList que contera todas as linhas do arquivo
-		ArrayList<String> codigo = new ArrayList<String>();
+		//ArrayList<String> codigo = new ArrayList<String>();
 		 
-		BufferedReader reader = new BufferedReader(new FileReader(nome_file));
-		String line;
-		 
-		while ((line = reader.readLine()) != null){
-		   
-			codigo.add(line);
+		File arq = new File(nome_file);
+		if (arq.exists()){
+			BufferedReader reader = new BufferedReader(new FileReader(nome_file));
+			String line;
+			 
+			while ((line = reader.readLine()) != null){
+			   
+				System.out.println(line);
+				evaluate(line);
+				//codigo.add(line);
+			}
+			
+			reader.close();
 		}
-		
-		reader.close();
+		else {
+			System.out.println("Arquivo n�o existe!");
+		}
 	}
 
 
@@ -112,7 +120,7 @@ public class Interpreter {
 					else if(elementos[i] == ')'){
 						
 						if(pilha.empty() == true){
-							System.out.println("entrou");
+							//System.out.println("entrou");
 							System.out.println("Expressão inválida");
 							break;
 						}
