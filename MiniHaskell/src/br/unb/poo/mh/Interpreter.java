@@ -98,7 +98,7 @@ public class Interpreter {
 			Stack<Character> pilha = new Stack<Character>();
 			
 			char elementos[] = exp.toCharArray();
-			
+		
 			/******************Validacao da expressao inserida*******************/
 			
 			
@@ -107,11 +107,12 @@ public class Interpreter {
 					if(elementos[i] == '('){
 						
 						pilha.push(elementos[i]);
+						
 					}
 					else if(elementos[i] == ')'){
 						
 						if(pilha.empty() == true){
-							
+							System.out.println("entrou");
 							System.out.println("Expressão inválida");
 							break;
 						}
@@ -120,6 +121,7 @@ public class Interpreter {
 							pilha.pop();
 						}
 					}
+					else{} 
 				}
 			
 
@@ -127,7 +129,7 @@ public class Interpreter {
 			
 			
 			if(pilha.empty() == false){	//Caso a expressao seja invalida
-				
+			
 				System.out.println("Expressão inválida");
 			}
 			else{	//Caso a expressao seja valida
@@ -242,7 +244,6 @@ public class Interpreter {
 				while(infixPosfix.isEmpty() == false){ //Esvaziando o restando da pilha
 					
 					exp_saida.add(infixPosfix.pop());
-					infixPosfix.pop();
 				}
 				
 			/**********************FIM********************************************/	
@@ -290,16 +291,15 @@ public class Interpreter {
 				}
 				
 				
+				avaliacao.pop();
 				System.out.println("Resultado: "+avaliacao.pop().getValor());
 				
 			/*******************************FIM***********************************/
 			
-			}
+			}  
 		} catch (Exception e) {
 			System.out.println("Expressão inválida");
 		}
 		
 	}
-
-	
 }
