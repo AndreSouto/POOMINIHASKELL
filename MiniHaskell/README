@@ -13,3 +13,5 @@ Rafaela Sinhoroto - 14/0091696
 
 Features:
 Foi incluido um ValorLista, que permite a adesao de uma lista na linguagem Mini Haskell. E uma classe interpreter foi criada pra resolver expressoes do tipo eval(). Um algoritmo foi desenvolvido para verificar as expressoes e computa-las. Segue comentado no codigo como usar a funcao e suas limitacoes. Obs.: Tal funcao resolve as operacoes colocadas pelo usuario atraves das classes criadas para a linguagem Mini Haskell (ExpressaoSoma, Subtracao, Divisao, Multiplicacao).
+
+Foi criado uma gram�tica "Expressao.g4" para utiliza��o com o ANTLR4 (vers�o 4.5.3), onde o arquivo .jar se encontra na pasta do projeto. Tamb�m foi utilizado o plugin "ANTLR4 IDE" para o ambiente eclipse. Os arquivos gerados pelo plugin est�o no package "Sources", por�m esse n�o � o package padr�o de modifica��o dos arquivos. Qualquer mudan�a na gram�rica exige que os arquivos sejam atualizados manualmente (apagados e recolocados no pacote).

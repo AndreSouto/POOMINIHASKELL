@@ -13,7 +13,7 @@ public class TesteInterpreter {
 	@Test
 	public void testeInterpreterArquivoExiste() throws IOException{
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("TestFile.txt"));
-		buffWrite.append("eval(2+2)");
+		buffWrite.append("2+2");
 		buffWrite.close();
 		String arg = "loadFile(TestFile.txt)";
 			Interpreter.evalInput(arg);
@@ -82,7 +82,7 @@ public class TesteInterpreter {
 		//Interpreter interpretador = new Interpreter();
 		String arg = "eval(df-es)";
 			Interpreter.evalInput(arg);
-		arg = "eval(2+2)";
+		arg = "eval(5-6)";
 			Interpreter.evalInput(arg);
 			
 	}

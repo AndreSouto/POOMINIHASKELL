@@ -1,1 +1,17 @@
+/Expressao.tokens
+/ExpressaoBaseVisitor.java
+/ExpressaoLexer.java
+/ExpressaoLexer.tokens
+/ExpressaoParser.java
+/ExpressaoVisitor.java
 /br/
+/ExpressaoBaseVisitor.class
+/ExpressaoLexer.class
+/ExpressaoParser$AtomExprContext.class
+/ExpressaoParser$ExprContext.class
+/ExpressaoParser$OpExprContext.class
+/ExpressaoParser$ParenExprContext.class
+/ExpressaoParser$StartContext.class
+/ExpressaoParser.class
+/ExpressaoVisitor.class
+/Sources/
